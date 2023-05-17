@@ -1,6 +1,6 @@
 # Composter
 
-Take on JetPack Compose views style in JavaScript 
+Take on JetPack Compose-like views in JavaScript 
 
 TODO:
 - [ ] Get rid of Reflection-style Modificator implementation
