@@ -37,16 +37,6 @@ export class Modifier {
           return proxy
         }
       },
-      apply(target, _, args) {
-        console.log("apply")
-        if (args.length !== 1) {
-          throw new Error('Build args should contain only one target element')
-        }
-        const el = args[0];
-        target.modifiers.forEach(m => {
-          m.apply(el)
-        })
-      }
     })
   }
 
