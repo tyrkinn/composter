@@ -1,6 +1,29 @@
+import { Modifier } from "./utils/modifier";
 import { Block } from "./elements/block";
 import { Text } from "./elements/text";
-import { Modifier } from "./utils/modifier";
+import { TextButton } from "./elements/text-button";
+import { observe } from "@zeppet/core";
+import { use } from "@zeppet/core";
+import { bindFieldToObs } from "@zeppet/actions";
+
+
+const nameObs = observe("Nikita")
+
+const btn = TextButton(
+  'Click me',
+  () => nameObs.mutate((prev) => prev + '!'),
+  new Modifier()
+    .padding(10)
+    .size(100, 50) 
+)
+
+const BindedText = use(
+  Text(
+    nameObs.getValue(),
+    new Modifier().padding(15)
+  ),
+  bindFieldToObs('textContent', nameObs)
+)
 
 const view = Block(
   new Modifier()
@@ -8,15 +31,12 @@ const view = Block(
     .margin(10)
     .border(10),
   [
-    Text(
-      'Composter.js',
-      new Modifier().padding(15)
-    )
+    BindedText,
+    btn
   ]
-  
 )
 
 
 document.body.append(
-  view
+  view,
 );
